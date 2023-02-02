@@ -4,29 +4,13 @@ module.exports = function (length, string) {
 	}
 
 	const middle = string.length / 2;
-	const firstDict = getDict(0, middle);
-	const secondDict = getDict(middle, string.length);
+	let diffs = 0;
 
-	for (const key in firstDict) {
-		if (firstDict[key] !== secondDict[key]) {
-			return 'NO';
+	for (let i = 0, j = middle; i < middle; i++, j++) {
+		if (string[i] !== string[j]) {
+			diffs++;
 		}
 	}
 
-	return 'YES';
-
-	function getDict(start, end) {
-		const dict = {};
-
-		for (; start < end; start++) {
-			const char = string[start];
-
-			if (!dict[char]) {
-				dict[char] = 0;
-			}
-			dict[char]++;
-		}
-
-		return dict;
-	}
+	return diffs < 3 ? 'YES' : 'NO';
 };
